@@ -20,6 +20,7 @@
     <br>
 
     <div>
+        <%= form.label "Upload an Image!" %><br>
         <%= form.file_field :picture %>
     </div>
 
@@ -30,6 +31,7 @@
         <%= form.select :status, ['public', 'private', 'archived'], selected: 'public' %>
     </div>
 
+    <br/>
     <br/>
     <br/>
 
