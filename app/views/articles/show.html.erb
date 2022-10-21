@@ -1,12 +1,14 @@
 <%= link_to "Back to All Articles", articles_path %>
 
-<h1><%= @article.title %></h1>
+<h1><%= @article.title %></h1><br >
 
-<p><%= @article.body%></p>
+<p><%= @article.body%></p><br>
 
-<%# <% if @article.picture.attached? %> %>
-    <%# <img src = "<%= (url_for(@article.picture)) %>"> %>
-<%# <% end %> %>
+<% if !@article.picture.nil? %>
+    <%= image_tag @article.picture.url(:medium) %>
+<% end %>
+
+<br/>
 
 <ul>
     <li><%= link_to "Edit", edit_article_path(@article) %></li><br>
@@ -16,8 +18,12 @@
     } %></li>
 </ul>
 
+<br/>
+
 <h2>Comments</h2>
 <%= render @article.comments %>
+
+<br/>
 
 <h2>Add a comment:</h2>
 <%= render 'comments/form' %>

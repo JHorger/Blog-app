@@ -6,7 +6,7 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    @article = Article.find(params[:id])
+    @article = Article.find.with_attached_picture(params[:id])
   end
 
   def new
@@ -15,9 +15,10 @@ class ArticlesController < ApplicationController
 
   def create
     @article = Article.new(article_params)
+    # @article.picture.attach(article_params)
 
     if @article.save
-      redirect_to @article
+      redirect_to root_path
     else
       render :new, status: :unprocessable_entity
     end
@@ -47,6 +48,6 @@ class ArticlesController < ApplicationController
 
   private
     def article_params
-      params.require(:article).permit(:title, :body, :status)
+      params.require(:article).permit(:title, :body, :status, :picture)
     end
 end
