@@ -59,6 +59,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_21_161034) do
 
   create_table "pictures", force: :cascade do |t|
     t.integer "article_id", null: false
+    t.string "picture_file_name"
+    t.string "picture_content_type"
+    t.integer "picture_file_size"
+    t.datetime "picture_updated_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["article_id"], name: "index_pictures_on_article_id"
