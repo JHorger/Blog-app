@@ -15,11 +15,12 @@ class ArticlesController < ApplicationController
 
   def create
     @article = Article.new(article_params)
-    # @article.picture.attach(article_params)
+    picture= @article.picture.create(picture_params)
+    @article.picture.attach(picture)
 
     if @article.save
       flash[:success] = "Article was successfully created!"
-      redirect_to @article
+      redirect_to root_path
     else
       flash[:error] = "Article could not be saved, try again!"
       render :new, status: :unprocessable_entity
@@ -53,5 +54,9 @@ class ArticlesController < ApplicationController
   private
     def article_params
       params.require(:article).permit(:title, :body, :status, :picture)
+    end
+
+    def picture_params
+      params.require(:picture).permit(:article_id, :picture, :picture_file_name, :picture_content_type, :picture_file_size, :picture_updated_at)
     end
 end

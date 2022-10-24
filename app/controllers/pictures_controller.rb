@@ -3,7 +3,7 @@ class PicturesController < ApplicationController
 
     def create
         @article = Article.find(params[:article_id])
-        @picture = @article.picture.url
+        @picture = @article.picture.create(picture_params)
         redirect_to article_path(@article)
     end
 
@@ -11,6 +11,6 @@ class PicturesController < ApplicationController
     private
     
     def picture_params
-        params.require(:picture).permit(:article_id, :picture_file_name, :picture_content_type, :picture_file_size, :picture_updated_at)
+        params.require(:picture).permit(:article_id, :picture, :picture_file_name, :picture_content_type, :picture_file_size, :picture_updated_at)
     end
 end

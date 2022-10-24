@@ -3,12 +3,12 @@ require 'paperclip'
 class Picture < ApplicationRecord
   belongs_to :article
 
-  validates_processing_of :picture
-  validates :picture_size_validation
+  validates_presence_of :picture
+  # validates :picture_size_validation
   validates :picture_file_name, presence: true
   validates :picture_content_type, presence: true
   validates :picture_file_size, presence: true
-  validates :picture_updated_at
+  validates :picture_updated_at, presence: true
   mount_uploader :picture, PictureUploader
   
 
