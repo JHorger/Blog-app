@@ -18,8 +18,10 @@ class ArticlesController < ApplicationController
     # @article.picture.attach(article_params)
 
     if @article.save
+      flash[:success] = "Article was successfully created!"
       redirect_to @article
     else
+      flash[:error] = "Article could not be saved, try again!"
       render :new, status: :unprocessable_entity
     end
   end
@@ -33,6 +35,7 @@ class ArticlesController < ApplicationController
 
     if @article.update(article_params)
       redirect_to @article
+      flash[:success] = "Article has been updated!"
     else
       render :edit, status: :unprocessable_entity
     end
@@ -41,6 +44,7 @@ class ArticlesController < ApplicationController
   def destroy
     @article = Article.find(params[:id])
     @article.destroy
+    flash[:success] = "Article has been successfully deleted!"
 
     redirect_to root_path, status: :see_other
   end

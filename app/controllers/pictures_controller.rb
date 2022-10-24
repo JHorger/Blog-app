@@ -1,4 +1,5 @@
 class PicturesController < ApplicationController
+    http_basic_authenticate_with name: "dhh", password: "secret", except: [:index, :show]
 
     def create
         @article = Article.find(params[:article_id])
