@@ -83,3 +83,5 @@ gem "aws-sdk-s3", "~> 1.115"
 gem "dotenv-rails", "~> 2.8"
 
 gem "paperclip", :git => "http://github.com/thoughtbot/paperclip.git"
+
+gem 'carrierwave', '~> 2.0'

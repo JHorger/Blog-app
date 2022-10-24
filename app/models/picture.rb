@@ -1,3 +1,5 @@
+require 'paperclip'
+
 class Picture < ApplicationRecord
   belongs_to :article
 

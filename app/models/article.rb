@@ -1,3 +1,5 @@
+require 'paperclip'
+
 class Article < ApplicationRecord
     include Visible
 
@@ -11,7 +13,7 @@ class Article < ApplicationRecord
     attr_accessor :picture
 
     # def picture
-    #     return unless @article.picture.nil?
+    #     return unless @article.picture_id.nil?
 
     #     picture.blob.attributes
     #     .slice('filename', 'byte-size', 'id')

@@ -6,7 +6,7 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    @article = Article.find.with_attached_picture(params[:id])
+    @article = Article.find(params[:id])
   end
 
   def new
@@ -18,7 +18,7 @@ class ArticlesController < ApplicationController
     # @article.picture.attach(article_params)
 
     if @article.save
-      redirect_to root_path
+      redirect_to @article
     else
       render :new, status: :unprocessable_entity
     end
