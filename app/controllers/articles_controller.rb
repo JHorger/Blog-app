@@ -1,3 +1,5 @@
+require 'pry'
+require 'paperclip'
 class ArticlesController < ApplicationController
   http_basic_authenticate_with name: "dhh", password: "secret", except: [:index, :show]
 
@@ -15,8 +17,10 @@ class ArticlesController < ApplicationController
 
   def create
     @article = Article.new(article_params)
-    picture= @article.picture.create(picture_params)
-    @article.picture.attach(picture)
+    # picture= @article.picture
+    # picture= @article.picture.create(picture_params)
+    # @picture = Picture.create(picture_params)
+    @article.update(picture_params)
 
     if @article.save
       flash[:success] = "Article was successfully created!"
@@ -53,10 +57,10 @@ class ArticlesController < ApplicationController
 
   private
     def article_params
-      params.require(:article).permit(:title, :body, :status, :picture)
+      params.require(:article).permit(:id, :title, :body, :status, :picture, picture_attributes: [:picture_file_name, :picture_content_type, :picture_file_size, :picture_updated_at])
     end
 
     def picture_params
-      params.require(:picture).permit(:article_id, :picture, :picture_file_name, :picture_content_type, :picture_file_size, :picture_updated_at)
+      params.permit(:id, :picture_file_name, :picture_content_type, :picture_file_size, :picture_updated_at)
     end
 end
