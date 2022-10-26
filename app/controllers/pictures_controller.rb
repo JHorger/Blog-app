@@ -13,6 +13,11 @@ class PicturesController < ApplicationController
     private
     
     def picture_params
-        params.require(:picture).permit(:article_id, :picture, :picture_file_name, :picture_content_type, :picture_file_size, :picture_updated_at)
+        params.require(:picture).permit(:id, :article_id, :picture_file_name, :picture_content_type, :picture_file_size, :picture_updated_at)
     end
 end
+
+
+
+
+

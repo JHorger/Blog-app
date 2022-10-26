@@ -20,7 +20,7 @@ class ArticlesController < ApplicationController
     # picture= @article.picture
     # picture= @article.picture.create(picture_params)
     # @picture = Picture.create(picture_params)
-    @article.update(picture_params)
+    # @article.update(picture_params)
 
     if @article.save
       flash[:success] = "Article was successfully created!"
@@ -57,10 +57,10 @@ class ArticlesController < ApplicationController
 
   private
     def article_params
-      params.require(:article).permit(:id, :title, :body, :status, :picture, picture_attributes: [:picture_file_name, :picture_content_type, :picture_file_size, :picture_updated_at])
+      params.require(:article).permit(:id, :title, :body, :status, :picture)
     end
 
     def picture_params
-      params.permit(:id, :picture_file_name, :picture_content_type, :picture_file_size, :picture_updated_at)
+      params.permit(:id, :article_id, :picture_file_name, :picture_content_type, :picture_file_size, :picture_updated_at)
     end
 end
