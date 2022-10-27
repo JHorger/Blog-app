@@ -4,7 +4,9 @@ class Article < ApplicationRecord
     include Visible
 
     has_many :comments, dependent: :destroy
-    has_one :picture
+    has_one_attached :picture do |attachable|
+        attachable.variant :thumb, resize_to_limit: [100, 100]
+    end
     
     validates :title, presence: true
     validates :body, presence: true, length: { minimum: 10 }

@@ -17,10 +17,8 @@ class ArticlesController < ApplicationController
 
   def create
     @article = Article.new(article_params)
-    # picture= @article.picture
-    # picture= @article.picture.create(picture_params)
-    # @picture = Picture.create(picture_params)
-    # @article.update(picture_params)
+    # @picture = @article.picture.create(picture_params)
+    # picture = @article_id
 
     if @article.save
       flash[:success] = "Article was successfully created!"
@@ -37,7 +35,7 @@ class ArticlesController < ApplicationController
 
   def update
     @article = Article.find(params[:id])
-
+    
     if @article.update(article_params)
       redirect_to @article
       flash[:success] = "Article has been updated!"

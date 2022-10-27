@@ -5,7 +5,7 @@
 <p><%= @article.body%></p><br>
 
 <% if !@article.picture.nil? %>
-    <%= image_tag @article.picture.url(:original) %>
+    <%= image_tag @article.picture.variant(:thumb) %>
 <% end %>
 
 
