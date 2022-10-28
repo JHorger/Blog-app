@@ -1,5 +1,5 @@
 require 'paperclip'
-
+require 'aws-sdk-s3'
 class Article < ApplicationRecord
     include Visible
 
@@ -8,16 +8,17 @@ class Article < ApplicationRecord
         attachable.variant :thumb, resize_to_limit: [100, 100]
     end
     
+    attr_accessor :picture
     validates :title, presence: true
     validates :body, presence: true, length: { minimum: 10 }
 
 
 
 
+    
     # validates_with AttachmentSizeValidator, attributes: :picture, less_than: 1.megabytes
     # has_attached_file :picture, dependent: :destroy, styles: { medium: "300x300>", thumb: "100x100>"}, default_url: "/images/:style/missing.png"
     # validates_attachment_content_type :picture, content_type: /\Aimage\/.*\z/
-    attr_accessor :picture
 
     # def picture
     #     return unless @article.picture_id.nil?

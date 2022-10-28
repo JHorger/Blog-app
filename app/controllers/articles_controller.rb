@@ -1,5 +1,6 @@
 require 'pry'
 require 'paperclip'
+require 'aws-sdk-s3'
 class ArticlesController < ApplicationController
   http_basic_authenticate_with name: "dhh", password: "secret", except: [:index, :show]
 
@@ -17,8 +18,6 @@ class ArticlesController < ApplicationController
 
   def create
     @article = Article.new(article_params)
-    # @picture = @article.picture.create(picture_params)
-    # picture = @article_id
 
     if @article.save
       flash[:success] = "Article was successfully created!"
@@ -58,7 +57,24 @@ class ArticlesController < ApplicationController
       params.require(:article).permit(:id, :title, :body, :status, :picture)
     end
 
+    # def picture_params
+    #   params.require(:picture).permit(:id, :article_id, :picture, :picture_file_name, :picture_content_type, :picture_file_size, :picture_updated_at)
+    # end
+
+    def permitted_params
+      params.require(:picture).permit(:id, :article_id, :picture, :picture_file_name, :picture_content_type, :picture_file_size, :picture_updated_at)
+    end
+
     def picture_params
-      params.permit(:id, :article_id, :picture_file_name, :picture_content_type, :picture_file_size, :picture_updated_at)
+      permitted_params[:picture]&.map do |file_upload|
+        {
+          picture: file_upload,
+          picture_file_name: permitted_params[:picture_file_name],
+          picture_content_type: permitted_params[:picture_content_type],
+          picture_file_size: permitted_params[:picture_file_size],
+          picture_updated_at: permitted_params[:picture_updated_at],
+          article_id: permitted_params[:article_id]
+        }
+      end
     end
 end
