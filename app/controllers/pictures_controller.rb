@@ -6,10 +6,19 @@ class PicturesController < ApplicationController
 
     def create
         @article = Article.find(params[:article_id])
-        @picture = @article.picture.create(picture_params)
+        @picture = @article.pictures.create(picture_params)
+        flash[:success] = "Picture was successfully posted!"
         redirect_to article_path(@article)
     end
 
+    def destroy
+        @article = Article.find(params[:article_id])
+        @picture = @article.pictures.find(params[:id])
+        @picture.destroy
+        
+        redirect_to article_path(@article), status: :see_other
+        flash[:success] = "Picture was successfully erased!"
+    end
 
     private
     

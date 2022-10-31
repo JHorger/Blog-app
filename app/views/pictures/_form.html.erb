@@ -1,0 +1,15 @@
+<%= link_to "Back to All Articles", articles_path %>
+
+<%= form_with model: [ @article, @article.pictures.build ] do |form| %>
+    
+    <div>
+        <%= form.label "Upload an Image!" %><br>
+        <%= form.file_field :picture %>
+    </div>
+
+    <br>
+
+    <p>
+        <%= form.submit %>
+    </p>
+<% end %>

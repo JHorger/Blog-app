@@ -1,11 +1,11 @@
 <%= link_to "Back to All Articles", articles_path %>
 
-<h1><%= @article.title %></h1><br >
+<h1><%= @article.title %></h1><br>
 
 <p><%= @article.body%></p><br>
 
 <% if !@article.picture.nil? %>
-    <%= image_tag @article.picture.variant(:thumb) %>
+    <%= image_tag(@article.picture.variant(:thumb)) %>
 <% end %>
 
 
@@ -26,3 +26,8 @@
 
 <h2>Add a comment:</h2>
 <%= render 'comments/form' %>
+
+<br/>
+
+<h2>Add a picture:</h2>
+<%= render 'pictures/form' %>
